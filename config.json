@@ -1,5 +1,5 @@
 {
     "dependencies": [ "command" ],
     "ignorable": true,
-    "help": "http://github.com/reality/depressionbot/blob/master/modules/link/README.md"
+    "help": "http://github.com/zuzak/depressionbot/blob/master/modules/github/README.md"
 }
