@@ -6,7 +6,6 @@ var request = require('request'),
     _ = require('underscore')._;
 
 var github = function(dbot) {
-    var baseURI = "http://api.github.com/";
     var commands = {
         '~repocount': function(event) {
         // TODO: add handling for non existent user
@@ -43,7 +42,28 @@ var github = function(dbot) {
                 
                 event.reply(str);
             });
-        }
+        },
+        '~milestone': function(event) {
+            var repo = "reality/depressionbot";
+            var reqUrl = "https://api.github.com/repos/";
+            reqUrl += repo + "/milestones";
+
+            request(reqUrl, function(error, response, body) {
+                var data = JSON.parse(body);
+                for (var section in data) {
+                    var milestone = data[section];
+                    if (milestone["title"] == event.params[1]){
+                        var str = "Milestone " + milestone["title"];
+                        var progress = milestone["closed_issues"] / (milestone["open_issues"] + milestone["closed_issues"]);
+                        str += " is " + progress + "% complete";
+                        str += " https://github.com/" + repo + "/issues?milestone=" + milestone["number"];
+                        event.reply(str);
+                        break;
+                    }
+                }
+           });
+       } 
+
     };
     this.commands = commands;
 
