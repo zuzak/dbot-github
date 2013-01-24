@@ -6,6 +6,13 @@ var request = require('request'),
     _ = require('underscore')._;
 
 var github = function(dbot) {
+    this.shortenURI = function(link) {
+        var shortened;
+        request({method: 'POST', uri: 'http://git.io', form:{url: link}}, function(error,response,body){
+            shortened = response.headers["location"];
+        });
+        return shortened;
+    };
     var commands = {
         '~repocount': function(event) {
         // TODO: add handling for non existent user
@@ -66,14 +73,14 @@ var github = function(dbot) {
                         }
                         bar += "]";
                         str += " is " + bar + progress + "% complete";
-                        str += " https://github.com/" + repo + "/issues?milestone=" + milestone["number"];
+                        str += github.shortenURI("https://github.com/" + repo + "/issues?milestone=" + milestone["number"]);
+                    //    str += " https://github.com/" + repo + "/issues?milestone=" + milestone["number"];
                         event.reply(str);
                         break;
                     }
                 }
            });
-       } 
-
+       }, 
     };
     this.commands = commands;
 
