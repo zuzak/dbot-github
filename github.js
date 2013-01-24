@@ -55,6 +55,7 @@ var github = function(dbot) {
                     if (milestone["title"] == event.params[1]){
                         var str = "Milestone " + milestone["title"];
                         var progress = milestone["closed_issues"] / (milestone["open_issues"] + milestone["closed_issues"]);
+                        progress = round(progress*100);
                         str += " is " + progress + "% complete";
                         str += " https://github.com/" + repo + "/issues?milestone=" + milestone["number"];
                         event.reply(str);
