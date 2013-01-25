@@ -50,13 +50,13 @@ var github = function(dbot) {
                 var str;
                 switch(data["status"]){
                     case "good":
-                        str = "\u000309Shit's good.";
+                        str = "\u000309Shit's good:";
                         break;
                     case "minor":
-                        str = "\u000308Shit's touchy.";
+                        str = "\u000308Shit's touchy:";
                         break;
                     case "major":
-                        str = "\u000304Shit's fucked.";
+                        str = "\u000304Shit's fucked:";
                         break;
                     default:
                         str = "https://status.github.com";
