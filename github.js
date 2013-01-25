@@ -63,6 +63,7 @@ var github = function(dbot) {
                         break;
                 }
                 event.reply(str);
+                event.reply(data["body"];
             });
         },
         '~milestone': function(event) {
