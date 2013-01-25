@@ -19,7 +19,8 @@ var github = function(dbot) {
         '~repo': function(event) {
             var repo = "";
             if (typeof event.params[1] == 'undefined') {
-                repo = dbot.config.github.defaultrepo;
+            //    repo = dbot.config.github.defaultrepo;
+                repo = "reality/depressionbot";
             } else {
                 repo = event.params[1];
             }
@@ -46,27 +47,12 @@ var github = function(dbot) {
             var reqUrl = "https://status.github.com/api/last-message.json";
             request(reqUrl, function(error,response,body){
                 var data = JSON.parse(body);
-                var str;
-                switch(data["status"]){
-                    case "good":
-                        str = "\u000309Shit's good:";
-                        break;
-                    case "minor":
-                        str = "\u000308Shit's touchy:";
-                        break;
-                    case "major":
-                        str = "\u000304Shit's fucked:";
-                        break;
-                    default:
-                        str = "https://status.github.com";
-                        break;
-                }
-                event.reply(str);
+                event.reply(dbot.t("status"+data["status"]));
                 event.reply(data["body"]);
             });
         },
         '~milestone': function(event) {
-            var repo = dbot.config.github.defaultrepo; 
+            var repo = "reality/depressionbot";
             var reqUrl = "https://api.github.com/repos/";
             reqUrl += repo + "/milestones";
 
