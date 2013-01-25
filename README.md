@@ -4,7 +4,7 @@ Grabs interesting data from the GitHub API.
 
 ### Description
 
-This module takes some interesting information about Github and parses it in a pleasing manner.
+This module for [depressionbot](https://github.com/reality/depressionbot) takes some interesting information about Github and parses it in a pleasing manner.
 
 ### Configuration
 #### defaultrepo
