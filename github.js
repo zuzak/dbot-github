@@ -66,7 +66,12 @@ var github = function(dbot) {
                         }
                         bar += "]";
                         str += " is " + bar + progress + "% complete";
-                        str += dbot.api.shortenURI("https://github.com/" + repo + "/issues?milestone=" + milestone["number"]);
+
+                        // in here 'cos I can't get the API working
+                        var longurl = "http://github.com/" + repo + "/issues?milestone=" + milestone["number"];
+                        request({method: 'POST', uri: 'http://git.io', form:{url: longurl}}, function(error, response, body){
+                            event.reply(response.headers["location"]);
+                        });
                     //    str += " https://github.com/" + repo + "/issues?milestone=" + milestone["number"];
                         event.reply(str);
                         break;
