@@ -13,14 +13,12 @@ var github = function(dbot) {
             request(reqUrl, function(error, response, body) {
             var result = JSON.parse(body);
 			event.reply(event.params[1] + " has " + result.length + " public repositories.");
-        //        event.reply(dbot.t('repocount',{'user': event.params[1], 'count' : result.length}));
             });
         },
         '~repo': function(event) {
             var repo = "";
             if (typeof event.params[1] == 'undefined') {
-            //    repo = dbot.config.github.defaultrepo;
-                repo = "reality/depressionbot";
+                repo = dbot.config.github.defaultrepo;
             } else {
                 repo = event.params[1];
             }
@@ -52,7 +50,7 @@ var github = function(dbot) {
             });
         },
         '~milestone': function(event) {
-            var repo = "reality/depressionbot";
+            var repo = dbot.config.github.defaultrepo; 
             var reqUrl = "https://api.github.com/repos/";
             reqUrl += repo + "/milestones";
 
@@ -75,12 +73,10 @@ var github = function(dbot) {
                         bar += "]";
                         str += " is " + bar + progress + "% complete";
 
-                        // in here 'cos I can't get the API working
                         var longurl = "http://github.com/" + repo + "/issues?milestone=" + milestone["number"];
                         request({method: 'POST', uri: 'http://git.io', form:{url: longurl}}, function(error, response, body){
                             event.reply(response.headers["location"]);
                         });
-                    //    str += " https://github.com/" + repo + "/issues?milestone=" + milestone["number"];
                         event.reply(str);
                         break;
                     }
