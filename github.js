@@ -43,6 +43,28 @@ var github = function(dbot) {
                 event.reply(str);
             });
         },
+        '~gstatus': function(event) {
+            var reqUrl = "https://status.github.com/api/status.json";
+            request(reqUrl, function(error,response,body){
+                var data = JSON.parse(body);
+                var str;
+                switch(data["status"]){
+                    case "good":
+                        str = "\u000309Shit's good.";
+                        break;
+                    case "minor":
+                        str = "\u000308Shit's touchy.";
+                        break;
+                    case "major":
+                        str = "\u000304Shit's fucked.";
+                        break;
+                    default:
+                        str = "https://status.github.com";
+                        break;
+                }
+                event.reply(str);
+            });
+        },
         '~milestone': function(event) {
             var repo = "reality/depressionbot";
             var reqUrl = "https://api.github.com/repos/";
