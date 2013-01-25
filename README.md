@@ -17,4 +17,4 @@ Returns milestone progress for any given milestone, with a link to the milestone
 #### ~gstatus
 Returns the [current status of Github](https://status.github.com), and a message explaining the current state of affairs.
 ### Dependencies
-* ``npm install [request](https://github.com/mikeal/request/)``
+* [request](https://github.com/mikeal/request/):``$ npm install request``

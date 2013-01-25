@@ -1,5 +1,15 @@
 {
 	"repocount": {
 		"english": "{user} has {count} public repos."
+    }
+    "statusgood": {
+        "english": "\u000309Shit's fine"
+    }
+    "statusminor": {
+        "english": "\u000308Shit's touchy:"
+    }
+    "statusmajor": {
+        "english": "\u000304Shit's fucked:"
+    }
 }
 
