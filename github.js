@@ -37,13 +37,13 @@ var github = function(dbot) {
                 str += " repo with ";
                 str += data["open_issues"] + " unresolved issues. ";
                 str += "[" + data["forks"] + "F " + data["watchers"] + "W]";
-                
+                event.reply("YES ZUZAK IT IS UPDATING"); 
+                event.reply(str);
                 // TODO: move this shizz into an api call
                 var longurl = "http://github.com/" + repo;
                 request({method: 'POST', uri: 'http://git.io', form:{url: longurl}}, function(error, response, body){
-                    str += " " + response.headers["location"];
+                    event.reply(dbot.t("location")+" "+response.headers["location"]);
                 };
-                event.reply(str);
             });
         },
         '~gstatus': function(event) {
