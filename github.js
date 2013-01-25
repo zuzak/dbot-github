@@ -7,7 +7,6 @@ var request = require('request'),
 
 var github = function(dbot) {
     var commands = {
-<<<<<<< HEAD
         '~repocount': function(event) {
         // TODO: add handling for non existent user
             var reqUrl = "https://api.github.com/users/" + event.params[1] + "/repos";
@@ -47,8 +46,6 @@ var github = function(dbot) {
                 event.reply(str);
             });
         },
-=======
->>>>>>> 0c3dad484c268190694a2a30d7e4816cfa4446c2
         '~gstatus': function(event) {
             var reqUrl = "https://status.github.com/api/last-message.json";
             request(reqUrl, function(error,response,body){
