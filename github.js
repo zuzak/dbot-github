@@ -43,7 +43,7 @@ var github = function(dbot) {
                 var longurl = "http://github.com/" + repo;
                 request({method: 'POST', uri: 'http://git.io', form:{url: longurl}}, function(error, response, body){
                     event.reply(dbot.t("location")+" "+response.headers["location"]);
-                };
+                });
             });
         },
         '~gstatus': function(event) {
