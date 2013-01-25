@@ -44,7 +44,7 @@ var github = function(dbot) {
             });
         },
         '~gstatus': function(event) {
-            var reqUrl = "https://status.github.com/api/status.json";
+            var reqUrl = "https://status.github.com/api/last-message.json";
             request(reqUrl, function(error,response,body){
                 var data = JSON.parse(body);
                 var str;
@@ -63,7 +63,7 @@ var github = function(dbot) {
                         break;
                 }
                 event.reply(str);
-                event.reply(data["body"];
+                event.reply(data["body"]);
             });
         },
         '~milestone': function(event) {
