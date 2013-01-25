@@ -19,8 +19,7 @@ var github = function(dbot) {
         '~repo': function(event) {
             var repo = "";
             if (typeof event.params[1] == 'undefined') {
-            //    repo = dbot.config.github.defaultrepo;
-                repo = "reality/depressionbot";
+                repo = dbot.config.github.defaultrepo;
             } else {
                 repo = event.params[1];
             }
@@ -67,7 +66,7 @@ var github = function(dbot) {
             });
         },
         '~milestone': function(event) {
-            var repo = "reality/depressionbot";
+            var repo = dbot.config.github.defaultrepo; 
             var reqUrl = "https://api.github.com/repos/";
             reqUrl += repo + "/milestones";
 
