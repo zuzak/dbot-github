@@ -16,3 +16,5 @@ Returns the number of public Github repositories for the specified user.
 Returns milestone progress for any given milestone, with a link to the milestone in question.
 #### ~gstatus
 Returns the [current status of Github](https://status.github.com), and a message explaining the current state of affairs.
+### Dependencies
+* ``npm install [request](https://github.com/mikeal/request/)``
