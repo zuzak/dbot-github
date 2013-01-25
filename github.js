@@ -38,6 +38,11 @@ var github = function(dbot) {
                 str += data["open_issues"] + " unresolved issues. ";
                 str += "[" + data["forks"] + "F " + data["watchers"] + "W]";
                 
+                // TODO: move this shizz into an api call
+                var longurl = "http://github.com/" + repo;
+                request({method: 'POST', uri: 'http://git.io', form:{url: longurl}}, function(error, response, body){
+                    str += " " + response.headers["location"];
+                };
                 event.reply(str);
             });
         },
