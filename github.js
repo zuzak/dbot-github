@@ -16,11 +16,9 @@ var github = function(dbot) {
             });
         },
         '~repo': function(event) {
-            var repo = "";
-            if (typeof event.params[1] == 'undefined') {
+            var repo = event.params[1];
+            if (typeof repo == 'undefined') {
                 repo = dbot.config.github.defaultrepo;
-            } else {
-                repo = event.params[1];
             }
 
             var reqUrl = "https://api.github.com/";
@@ -62,8 +60,8 @@ var github = function(dbot) {
                         var progress = milestone["closed_issues"] / (milestone["open_issues"] + milestone["closed_issues"]);
                         progress = Math.round(progress*100);
                         var bar = "[";
-                        for (var i = 1; i < 10; i++) {
-                            if  ((progress / (i*10)) > 1) {
+                        for (var i = 10; i < 100; i += 10) {
+                            if  ((progress/i) > 1) {
                                 bar += "█";
                             } else {
                                 bar += " ";
