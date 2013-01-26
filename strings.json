@@ -13,6 +13,12 @@
     },
     "location": {
         "english": "You can find that shit at:"
+    },
+    "forkedrepo": {
+        "english": "{name} is a forked {language} repo with {open_issues} unresolved issues [{forks}F {watchers}W]"
+    },
+    "unforkedrepo": {
+        "english": "{name} is a {language} repo with {open_issues} unresolved issues [{forks}F {watchers]W]"
     }
 }
 

@@ -28,20 +28,15 @@ var github = function(dbot) {
 
             request(reqUrl, function(error, response, body) {
                 var data = JSON.parse(body);
-                var str = "";
-                str += data["name"] + " is a ";
                 if (data["fork"] == true) {
-                    str += "forked ";
+                   event.reply(dbot.t("forkedrepo",data); 
+                } else {
+                    event.reply(dbot.t("unforkedrepo",data);
                 }
-                str += data["language"];
-                str += " repo with ";
-                str += data["open_issues"] + " unresolved issues. ";
-                str += "[" + data["forks"] + "F " + data["watchers"] + "W]";
-                event.reply(str);
                 // TODO: move this shizz into an api call
                 var longurl = "http://github.com/" + repo;
                 request({method: 'POST', uri: 'http://git.io', form:{url: longurl}}, function(error, response, body){
-                    event.reply(dbot.t("location")+" "+response.headers["location"]);
+                    event.reply(dbot.t('location')+" "+response.headers["location"]);
                 });
             });
         }, 
