@@ -10,12 +10,13 @@ var github = function(dbot) {
         '~repocount': function(event) {
             var reqUrl = "https://api.github.com/users/" + event.params[1] + "/repos";
             request(reqUrl, function(error, response, body) {
-            var result = JSON.parse(body);
-            if(result["message"] == undefined) {
-                event.reply(dbot.t("repocount",{"user": event.params[1], "count": result.length}));
-            } else {
-                event.reply(dbot.t("usernotfound");
-            });
+                var result = JSON.parse(body);
+                if(result["message"] == undefined) {
+                    event.reply(dbot.t("repocount",{"user": event.params[1], "count": result.length}));
+                } else {
+                    event.reply(dbot.t("usernotfound"));
+               }
+           });
         },
         '~repo': function(event) {
             var repo = event.params[1];

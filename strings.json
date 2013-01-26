@@ -1,7 +1,7 @@
 {
 	"repocount": {
 		"english": "{user} has {count} public repos."
-    }
+    },
     "statusgood": {
         "english": "\u000309Shit's fine"
     },
@@ -19,10 +19,9 @@
     },
     "unforkedrepo": {
         "english": "{name} is a {language} repo with {open_issues} unresolved issues [{forks}F {watchers]W]"
-    }
+    },
     "usernotfound": {
         english": "User not found."
     }
-
 }
 
