@@ -29,9 +29,9 @@ var github = function(dbot) {
             request(reqUrl, function(error, response, body) {
                 var data = JSON.parse(body);
                 if (data["fork"] == true) {
-                   event.reply(dbot.t("forkedrepo",data); 
+                   event.reply(dbot.t("forkedrepo",data)); 
                 } else {
-                    event.reply(dbot.t("unforkedrepo",data);
+                    event.reply(dbot.t("unforkedrepo",data));
                 }
                 // TODO: move this shizz into an api call
                 var longurl = "http://github.com/" + repo;
