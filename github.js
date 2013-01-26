@@ -37,7 +37,6 @@ var github = function(dbot) {
                 str += " repo with ";
                 str += data["open_issues"] + " unresolved issues. ";
                 str += "[" + data["forks"] + "F " + data["watchers"] + "W]";
-                event.reply("YES ZUZAK IT IS UPDATING"); 
                 event.reply(str);
                 // TODO: move this shizz into an api call
                 var longurl = "http://github.com/" + repo;
@@ -45,7 +44,7 @@ var github = function(dbot) {
                     event.reply(dbot.t("location")+" "+response.headers["location"]);
                 });
             });
-        },
+        }, 
         '~gstatus': function(event) {
             var reqUrl = "https://status.github.com/api/last-message.json";
             request(reqUrl, function(error,response,body){
@@ -88,7 +87,7 @@ var github = function(dbot) {
                 }
            });
         }, 
-        '~repo': function(event) {
+/*        '~repo': function(event) {
             var repo = "";
             if (typeof event.params[1] == 'undefined') {
                 repo = dbot.config.github.defaultrepo;
@@ -113,7 +112,7 @@ var github = function(dbot) {
                 
                 event.reply(str);
             });
-        },
+        },*/
         '~repocount': function(event) {
         // TODO: add handling for non existent user
             var reqUrl = "https://api.github.com/users/" + event.params[1] + "/repos";
