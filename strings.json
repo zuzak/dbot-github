@@ -1,6 +1,6 @@
 {
-	"repocount": {
-		"english": "{user} has {count} public repos."
+    "repocount": {
+        "english": "{user} has {count} public repos."
     },
     "statusgood": {
         "english": "\u000309Shit's fine"
