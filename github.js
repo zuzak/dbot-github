@@ -93,7 +93,7 @@ var github = function(dbot) {
         },
         '~issue': function(event) {
             var repo = dbot.config.github.defaultrepo;
-            var reqUrl = "http://api.github.com/repos/" + repo + "/issues/" + event.params[1];
+            var reqUrl = "https://api.github.com/repos/" + repo + "/issues/" + event.params[1];
             request(reqUrl, function(error,response, body) {
                 if (response.statusCode == "200") {
                     var data = JSON.parse(body);
