@@ -22,6 +22,12 @@
     },
     "usernotfound": {
         "english": "User not found."
+    },
+    "issuenotfound": {
+        "english": "Unable to find that issue."
+    },
+    "issue": {
+        "english": "Issue {number}: {title} [{state}; {comments} comments]"
     }
 }
 

@@ -90,7 +90,22 @@ var github = function(dbot) {
             var result = JSON.parse(body);
 			event.reply(event.params[1] + " has " + result.length + " public repositories.");
             });
-        }
+        },
+        '~issue': function(event) {
+            var repo = dbot.config.github.defaultrepo;
+            var reqUrl = "http://api.github.com/repos/" + repo + "/issues/" + event.params[1];
+            request(reqUrl, function(error,response, body) {
+                if (response.statusCode == "200") {
+                    var data = JSON.parse(body);
+                    event.reply(dbot.t("issue",data));
+                    request({method: 'POST', uri: 'http://git.io', form:{url: data["html_url"]}}, function(error, response, body){
+                        event.reply(response.headers["location"]);
+                    });
+                } else {
+                    event.reply(dbot.t("issuenotfound"));
+                }
+            });
+       }
     };
     this.commands = commands;
 
