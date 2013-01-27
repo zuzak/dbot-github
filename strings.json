@@ -18,7 +18,7 @@
         "english": "{name} is a forked {language} repo with {open_issues} unresolved issues [{forks}F {watchers}W]"
     },
     "unforkedrepo": {
-        "english": "{name} is a {language} repo with {open_issues} unresolved issues [{forks}F {watchers]W]"
+        "english": "{name} is a {language} repo with {open_issues} unresolved issues [{forks}F {watchers}W]"
     },
     "usernotfound": {
         "english": "User not found."
