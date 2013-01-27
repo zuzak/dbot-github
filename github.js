@@ -113,7 +113,7 @@ var github = function(dbot) {
        '~commits': function(event) {
             exec("git rev-list --all | wc -l", function(error, stdout, stderr) {
                 stdout = stdout.trim();
-                request("http://numbersapi.com/" + stdout + "?fragment&notfound=XXX", function(error, response, body){
+                request("http://numbersapi.com/" + stdout + "?fragment&default=XXX", function(error, response, body){
                     if (body != "XXX"){
                         event.reply("My repository has the same number of commits as " + body + " (" + stdout +").");
                     } else {
