@@ -3,7 +3,8 @@
  * Description: Retrieves interesting Github information
  */
 var request = require('request'),
-    _ = require('underscore')._;
+    _ = require('underscore')._,
+    exec = require('child_process').exec;
 
 var github = function(dbot) {
     var commands = {
@@ -97,15 +98,30 @@ var github = function(dbot) {
             request(reqUrl, function(error,response, body) {
                 if (response.statusCode == "200") {
                     var data = JSON.parse(body);
+                    if (data["state"]=="open") {
+                        data["state"] = "\u000303" + data["state"];
+                    } else {
+                        data["state"] = "\u000304" + data["state"];
+                    }
                     event.reply(dbot.t("issue",data));
-                    request({method: 'POST', uri: 'http://git.io', form:{url: data["html_url"]}}, function(error, response, body){
-                        event.reply(response.headers["location"]);
-                    });
+                    event.reply(data["html_url"]);
                 } else {
                     event.reply(dbot.t("issuenotfound"));
                 }
             });
-       }
+       },
+       '~commits': function(event) {
+            exec("git rev-list --all | wc -l", function(error, stdout, stderr) {
+                stdout = stdout.trim();
+                request("http://numbersapi.com/" + stdout + "?fragment&notfound=XXX", function(error, response, body){
+                    if (body != "XXX"){
+                        event.reply("My repository has the same number of commits as " + body + " (" + stdout +").");
+                    } else {
+                        event.reply("My code has been committed " + stdout + " times.");
+                    }
+               });
+            });
+        }
     };
     this.commands = commands;
 
