@@ -28,10 +28,10 @@
     },
     "issue": {
         "english": "Issue \u000308{number}\u000315: {title} [{state}\u000315; {comments} comments]"
-    }
+    },
     "commitcountboring": {
         "english": "My code has been committed {count} times."
-    }
+    },
     "commitcountfun": {
         "english": "My repository has the same number of commits as {fact} ({count})."
     }
