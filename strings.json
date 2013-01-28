@@ -34,6 +34,9 @@
     },
     "commitcountfun": {
         "english": "My repository has the same number of commits as {fact} ({count})."
+    },
+    "commitcountyear": {
+        "english": "My repository's commits number {count}, the year that {fact}."
     }
 }
 

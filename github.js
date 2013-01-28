@@ -115,9 +115,16 @@ var github = function(dbot) {
                 stdout = stdout.trim();
                 request("http://numbersapi.com/" + stdout + "?fragment&default=XXX", function(error, response, body){
                     if (body != "XXX"){
-                        event.reply("My repository has the same number of commits as " + body + " (" + stdout +").");
+                        event.reply(dbot.t("commitcountfun",{"fact": body, "count": stdout}));
                     } else {
-                        event.reply("My code has been committed " + stdout + " times.");
+                        // nothing fun about the number, let's try the year
+                        request("http://numbersapi.com/" + stdout + "/year?fragment&default=XXX", function(error, response, body){
+                            if (body != "XXX"){
+                                event.reply(dbot.t("commitcountyear",{"fact": body, "count": stdout}));
+                            } else {
+                                event.reply(dbot.t("commitcountboring",{"count": stdout}));
+                            }
+                        });
                     }
                });
             });
