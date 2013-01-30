@@ -97,6 +97,9 @@ var github = function(dbot) {
             request(reqUrl, function(error,response, body) {
                 if (response.statusCode == "200") {
                     var data = JSON.parse(body);
+                    if (data["pull_request"]){
+                        data["pullreq"] = "\000313*with code*";
+                    }
                     event.reply(dbot.t("issue",data));
                     request({method: 'POST', uri: 'http://git.io', form:{url: data["html_url"]}}, function(error, response, body){
                         event.reply(response.headers["location"]);
