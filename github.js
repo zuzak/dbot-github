@@ -98,7 +98,7 @@ var github = function(dbot) {
             request(reqUrl, function(error,response, body) {
                 if (response.statusCode == "200") {
                     var data = JSON.parse(body);
-                    if (data["pull_request"]){
+                    if (data["pull_request"]["diff_url"]){
                         data["pullreq"] = "\000313*with code*";
                     } else {
                         data["pullreq"] = "";
