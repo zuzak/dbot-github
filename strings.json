@@ -27,7 +27,16 @@
         "english": "Unable to find that issue."
     },
     "issue": {
-        "english": "Issue {number}: {title} [{state}; {comments} comments]"
+        "english": "Issue \u000308{number}\u000315: {title} [{state}{pullreq}\u000315; {comments} comments]"
+    },
+    "commitcountboring": {
+        "english": "My code has been committed {count} times."
+    },
+    "commitcountfun": {
+        "english": "My repository has the same number of commits as {fact} ({count})."
+    },
+    "commitcountyear": {
+        "english": "My repository's commits number {count}, the year that {fact}."
     }
 }
 

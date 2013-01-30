@@ -3,7 +3,8 @@
  * Description: Retrieves interesting Github information
  */
 var request = require('request'),
-    _ = require('underscore')._;
+    _ = require('underscore')._,
+    exec = require('child_process').exec;
 
 var github = function(dbot) {
     var commands = {
@@ -93,22 +94,46 @@ var github = function(dbot) {
         },
         '~issue': function(event) {
             var repo = dbot.config.github.defaultrepo;
-            var reqUrl = "http://api.github.com/repos/" + repo + "/issues/" + event.params[1];
+            var reqUrl = "https://api.github.com/repos/" + repo + "/issues/" + event.params[1];
             request(reqUrl, function(error,response, body) {
                 if (response.statusCode == "200") {
                     var data = JSON.parse(body);
                     if (data["pull_request"]){
                         data["pullreq"] = "\000313*with code*";
+                    } else {
+                        data["pullreq"] = "";
+                    }
+                    if (data["state"]=="open") {
+                        data["state"] = "\u000303" + data["state"];
+                    } else {
+                        data["state"] = "\u000304" + data["state"];
                     }
                     event.reply(dbot.t("issue",data));
-                    request({method: 'POST', uri: 'http://git.io', form:{url: data["html_url"]}}, function(error, response, body){
-                        event.reply(response.headers["location"]);
-                    });
+                    event.reply(data["html_url"]);
                 } else {
                     event.reply(dbot.t("issuenotfound"));
                 }
             });
-       }
+       },
+       '~commits': function(event) {
+            exec("git rev-list --all | wc -l", function(error, stdout, stderr) {
+                stdout = stdout.trim();
+                request("http://numbersapi.com/" + stdout + "?fragment&default=XXX", function(error, response, body){
+                    if (body != "XXX"){
+                        event.reply(dbot.t("commitcountfun",{"fact": body, "count": stdout}));
+                    } else {
+                        // nothing fun about the number, let's try the year
+                        request("http://numbersapi.com/" + stdout + "/year?fragment&default=XXX", function(error, response, body){
+                            if (body != "XXX"){
+                                event.reply(dbot.t("commitcountyear",{"fact": body, "count": stdout}));
+                            } else {
+                                event.reply(dbot.t("commitcountboring",{"count": stdout}));
+                            }
+                        });
+                    }
+               });
+            });
+        }
     };
     this.commands = commands;
 
