@@ -104,16 +104,20 @@ var github = function(dbot) {
             request(reqUrl, function(error,response, body) {
                 if (response.statusCode == "200") {
                     var data = JSON.parse(body);
-                    if (data["pull_request"]["diff_url"]){
-                        data["pullreq"] = "\000313*with code*";
+                    if (data["pull_request"]["html_url"] != null){
+                        console.log(data["pull_request"]["html_url"]);
+                        data["pull_request"] = " with code";
                     } else {
-                        data["pullreq"] = "";
+                        data["pull_request"] = "";
                     }
                     if (data["state"]=="open") {
                         data["state"] = "\u000303" + data["state"];
                     } else {
                         data["state"] = "\u000304" + data["state"];
                     }
+                    //for (label in data["labels"]){
+                    //    data["label"] = data["label"] + " " + label["name"];
+                    //}
                     event.reply(dbot.t("issue",data));
                     event.reply(data["html_url"]);
                 } else {
