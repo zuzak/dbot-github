@@ -115,9 +115,12 @@ var github = function(dbot) {
                     } else {
                         data["state"] = "\u000304" + data["state"];
                     }
-                    //for (label in data["labels"]){
-                    //    data["label"] = data["label"] + " " + label["name"];
-                    //}
+                    var labels = "";
+                    for (var i=0; i < data["labels"].length; i++) { // for-in doesn't like me
+                        var color = "\u0003" + (parseInt(data["labels"][i]["color"],16) % 15);
+                        labels += " " + color + data["labels"][i]["name"];
+                    }
+                    data["label"] = labels;
                     event.reply(dbot.t("issue",data));
                     event.reply(data["html_url"]);
                 } else {
