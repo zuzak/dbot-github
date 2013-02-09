@@ -65,7 +65,6 @@ var github = function(dbot) {
                         progress = Math.round(progress*100);
                         var bar = "[";
                         for (var i = 10; i < 100; i += 10) {
-                            p
                             if  ((progress/i) > 1) {
                                 bar += "█";
                             } else {

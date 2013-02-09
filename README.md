@@ -9,6 +9,8 @@ This module for [depressionbot](https://github.com/reality/depressionbot) takes 
 ### Configuration
 #### defaultrepo
 When repository information is lacking from the command, this repository will be used.
+#### sortorder
+Defines the behaviour of ~issue when no arguments are given. Options are ``created``, ``updated``, or ``comments``.
 ### Commands
 #### ~commits
 Returns the number of commits in the repository of the current depressionbot instance.
