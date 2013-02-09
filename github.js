@@ -27,8 +27,8 @@ var github = function(dbot) {
 
             var reqUrl = "https://api.github.com/";
             reqUrl += "repos/" + repo;
-
             request(reqUrl, function(error, response, body) {
+
                 var data = JSON.parse(body);
                 if (data["fork"] == true) {
                    event.reply(dbot.t("forkedrepo",data)); 
@@ -65,6 +65,7 @@ var github = function(dbot) {
                         progress = Math.round(progress*100);
                         var bar = "[";
                         for (var i = 10; i < 100; i += 10) {
+                            p
                             if  ((progress/i) > 1) {
                                 bar += "█";
                             } else {
@@ -93,17 +94,31 @@ var github = function(dbot) {
             });
         },
         '~issue': function(event) {
-            var repo = dbot.config.github.defaultrepo;
-            var issue = event.params[1];
-            if (isNaN(event.params[1])){
+            var repo;
+            var issue;
+            if (isNaN(event.params[1]) && event.params[1]){ // if ~issue foo/bar
                 repo = event.params[1];
                 issue = event.params[2];
+            } else {
+                repo = dbot.config.github.defaultrepo;
+                issue = event.params[1];
             }
 
-            var reqUrl = "https://api.github.com/repos/" + repo + "/issues/" + issue;
+            if (!issue) { // issue is undefined
+                issue = "";
+            } else {
+                issue = "/" + issue; // got to be a better way
+            }
+            
+            var reqUrl = "https://api.github.com/repos/" + repo + "/issues" + issue + "?sort=" + dbot.config.github.sortorder;
+            console.log(reqUrl);
             request(reqUrl, function(error,response, body) {
                 if (response.statusCode == "200") {
                     var data = JSON.parse(body);
+                    if (issue == ""){
+                        data = data[0];
+                        console.log(data);
+                    }
                     if (data["pull_request"]["html_url"] != null){
                         console.log(data["pull_request"]["html_url"]);
                         data["pull_request"] = " with code";

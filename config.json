@@ -2,5 +2,6 @@
     "dependencies": [ "command" ],
     "ignorable": true,
     "help": "http://github.com/zuzak/depressionbot/blob/master/modules/github/README.md",
-    "defaultrepo": "reality/depressionbot"
+    "defaultrepo": "reality/depressionbot",
+    "sortorder": "updated"
 }
