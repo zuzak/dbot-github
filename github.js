@@ -52,6 +52,11 @@ var github = function(dbot) {
         },
         '~milestone': function(event) {
             var repo = dbot.config.github.defaultrepo; 
+            var name = event.params[1];
+            if (event.params[2]){
+                repo = name;
+                name = event.params[2];
+            }
             var reqUrl = "https://api.github.com/repos/";
             reqUrl += repo + "/milestones";
 
@@ -59,7 +64,7 @@ var github = function(dbot) {
                 var data = JSON.parse(body);
                 for (var section in data) {
                     var milestone = data[section];
-                    if (milestone["title"] == event.params[1]){
+                    if (milestone["title"] == name){
                         var str = "Milestone " + milestone["title"];
                         var progress = milestone["closed_issues"] / (milestone["open_issues"] + milestone["closed_issues"]);
                         progress = Math.round(progress*100);
