@@ -27,7 +27,7 @@
         "english": "Unable to find that issue."
     },
     "issue": {
-        "english": "Issue \u000308{number}\u000315: {title} [{state}{pull_request}\u000315; {comments} comments]{label}"
+        "english": "Issue \u000308{number}\u0003: {title} [{state}{pull_request}\u000315; {comments} comments]{label}"
     },
     "commitcountboring": {
         "english": "My code has been committed {count} times."
