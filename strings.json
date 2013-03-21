@@ -23,6 +23,9 @@
     "usernotfound": {
         "en": "User not found."
     },
+    "reponotfound": {
+        "en": "Repo not found."
+    },
     "issuenotfound": {
         "en": "Unable to find that issue."
     },
