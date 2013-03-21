@@ -9,14 +9,20 @@ var request = require('request'),
 var github = function(dbot) {
     var commands = {
         '~repocount': function(event) {
+            if(_.isUndefined(event.params[1])) {
+                return;
+            }
             var reqUrl = "https://api.github.com/users/" + event.params[1] + "/repos";
             request(reqUrl, function(error, response, body) {
                 if(response.statusCode == "200") {
                     var result = JSON.parse(body);
-                    event.reply(dbot.t("repocount",{"user": event.params[1], "count": result.length}));
-                } else {
-                    event.reply(dbot.t("usernotfound"));
-               }
+                    if(!_.isUndefined(result.length)) {
+                        event.reply(dbot.t("repocount",{"user": event.params[1], "count": result.length}));
+                        return;
+                    }
+                }
+
+                event.reply(dbot.t("usernotfound"));
            });
         },
         '~repo': function(event) {
@@ -30,6 +36,10 @@ var github = function(dbot) {
             request(reqUrl, function(error, response, body) {
 
                 var data = JSON.parse(body);
+                if(!(_.has(data, "fork") && _.has(data, "open_issues") && _.has(data, "forks") && _.has(data, "watchers"))) {
+                    event.reply(dbot.t("reponotfound"));
+                    return;
+                }
                 if (data["fork"] == true) {
                    event.reply(dbot.t("forkedrepo",data)); 
                 } else {
@@ -122,6 +132,10 @@ var github = function(dbot) {
                     if (issue == ""){
                         data = data[0];
                         console.log(data);
+                    }
+                    if (_.isUndefined(data)) {
+                        event.reply(dbot.t('issuenotfound'));
+                        return
                     }
                     if (data["pull_request"]["html_url"] != null){
                         console.log(data["pull_request"]["html_url"]);
