@@ -99,14 +99,6 @@ var github = function(dbot) {
                 }
            });
         }, 
-        '~repocount': function(event) {
-        // TODO: add handling for non existent user
-            var reqUrl = "https://api.github.com/users/" + event.params[1] + "/repos";
-            request(reqUrl, function(error, response, body) {
-            var result = JSON.parse(body);
-			event.reply(event.params[1] + " has " + result.length + " public repositories.");
-            });
-        },
         '~issue': function(event) {
             var repo;
             var issue;
