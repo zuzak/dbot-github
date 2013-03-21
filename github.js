@@ -3,7 +3,6 @@
  * Description: Retrieves interesting Github information
  */
 var request = require('request'),
-    _ = require('underscore')._,
     exec = require('child_process').exec;
 
 var github = function(dbot) {
