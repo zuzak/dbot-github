@@ -7,6 +7,15 @@ var request = require('request'),
     exec = require('child_process').exec;
 
 var github = function(dbot) {
+    this.api = {
+        "githubStatus": function(callback){
+            var reqUrl = "https://status.github.com/api/last-message.json";
+            request(reqUrl, function(error, response, body) {
+                callback(JSON.parse(body));
+            });
+        }
+    };
+
     var commands = {
         '~repocount': function(event) {
             var reqUrl = "https://api.github.com/users/" + event.params[1] + "/repos";
@@ -43,12 +52,12 @@ var github = function(dbot) {
             });
         }, 
         '~gstatus': function(event) {
-            var reqUrl = "https://status.github.com/api/last-message.json";
-            request(reqUrl, function(error,response,body){
-                var data = JSON.parse(body);
-                event.reply(dbot.t("status"+data["status"]));
-                event.reply(data["body"]);
-            });
+            data = this.api.githubStatus(function(data){
+                    console.log(data);
+                    event.reply(dbot.t("status"+data["status"]));
+                    event.reply(data["body"]);
+                }.bind(this)
+            );
         },
         '~milestone': function(event) {
             var repo = dbot.config.github.defaultrepo; 
