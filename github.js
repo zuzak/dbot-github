@@ -136,7 +136,6 @@ var github = function(dbot) {
             
             var reqUrl = "https://api.github.com/repos/" + repo + "/issues" + issue + "?sort=" + dbot.config.github.sortorder;
             request.get({"url": reqUrl, "headers": { "User-Agent": "reality/depressionbot"}}, function(error,response, body) {
-                event.reply(response.statusCode);
                 if (response.statusCode == "200") {
                     var data = JSON.parse(body);
                     console.log(data);
