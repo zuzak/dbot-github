@@ -9,7 +9,7 @@ var github = function(dbot) {
     this.api = {
         "githubStatus": function(callback){
             var reqUrl = "https://status.github.com/api/last-message.json";
-            request({"url": reqUrl, "headers": {"UserAgent": "reality/depressionbot"}}, function(error, response, body) {
+            request({"url": reqUrl, "headers": {"UserAgent": dbot.config.github.useragent}}, function(error, response, body) {
                 callback(JSON.parse(body));
             });
         }
@@ -19,7 +19,7 @@ var github = function(dbot) {
     var commands = {
         '~repocount': function(event) {
             var reqUrl = "https://api.github.com/users/" + event.params[1] + "/repos";
-            request({"url": reqUrl, "headers": {"UserAgent": "reality/depressionbot"}}, function(error, response, body) {
+            request({"url": reqUrl, "headers": {"UserAgent": dbot.config.github.useragent}}, function(error, response, body) {
                 if(response.statusCode == "200") {
                     var result = JSON.parse(body);
                     event.reply(dbot.t("repocount",{"user": event.params[1], "count": result.length}));
@@ -36,7 +36,7 @@ var github = function(dbot) {
 
             var reqUrl = "https://api.github.com/";
             reqUrl += "repos/" + repo;
-            request({"url": reqUrl, "headers": {"UserAgent": "reality/depressionbot"}}, function(error, response, body) {
+            request({"url": reqUrl, "headers": {"UserAgent": dbot.config.github.useragent}}, function(error, response, body) {
 
                 var data = JSON.parse(body);
                 if (data["fork"] == true) {
@@ -69,7 +69,7 @@ var github = function(dbot) {
             var reqUrl = "https://api.github.com/repos/";
             reqUrl += repo + "/milestones";
 
-            request({"url": reqUrl, "headers":{"UserAgent": "reality/depressionbot"}}, function(error, response, body) {
+            request({"url": reqUrl, "headers":{"UserAgent": dbot.config.github.useragent}}, function(error, response, body) {
                 var data = JSON.parse(body);
                 for (var section in data) {
                     var milestone = data[section];
@@ -101,14 +101,14 @@ var github = function(dbot) {
         '~repocount': function(event) {
         // TODO: add handling for non existent user
             var reqUrl = "https://api.github.com/users/" + event.params[1] + "/repos";
-            request({"url": reqUrl,"headers": { "UserAgent": "reality/depressionbot"}}, function(error, response, body) {
+            request({"url": reqUrl,"headers": { "UserAgent": dbot.config.github.useragent}}, function(error, response, body) {
             var result = JSON.parse(body);
 			event.reply(event.params[1] + " has " + result.length + " public repositories.");
             });
         },
         '~grate': function(event) {
-            request({"url":"https://api.github.com/rate_limit", "headers":{"UserAgent": "reality/depressionbot"}}, function(error, response, body) {
-                event.reply("reality/depressionbot");
+            request({"url":"https://api.github.com/rate_limit", "headers":{"UserAgent": dbot.config.github.useragent}}, function(error, response, body) {
+                event.reply(dbot.config.github.useragent);
                 var data = JSON.parse(body);
                 if (data.message){
                     event.reply(data.message);
@@ -135,7 +135,7 @@ var github = function(dbot) {
             }
             
             var reqUrl = "https://api.github.com/repos/" + repo + "/issues" + issue + "?sort=" + dbot.config.github.sortorder;
-            request.get({"url": reqUrl, "headers": { "User-Agent": "reality/depressionbot"}}, function(error,response, body) {
+            request.get({"url": reqUrl, "headers": { "User-Agent": dbot.config.github.useragent}}, function(error,response, body) {
                 if (response.statusCode == "200") {
                     var data = JSON.parse(body);
                     console.log(data);
