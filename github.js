@@ -116,8 +116,7 @@ var github = function(dbot) {
             });
         },
         '~issue': function(event) {
-            var repo;
-            var issue;
+            var repo, issue, randflag;
             if (isNaN(event.params[1]) && event.params[1]){ // if ~issue foo/bar
                 repo = event.params[1];
                 issue = event.params[2];
@@ -126,7 +125,10 @@ var github = function(dbot) {
                 issue = event.params[1];
             }
 
-            if (!issue) { // issue is undefined
+            if (issue == "*" || issue == "random" || issue == "0") {
+                issue = "";
+                randflag = true;
+            } else if (!issue) { // issue is undefined
                 issue = "";
             } else {
                 issue = "/" + issue; // got to be a better way
@@ -136,10 +138,12 @@ var github = function(dbot) {
             request.get({"url": reqUrl, headers: { "User-Agent": dbot.config.github.useragent}}, function(error,response, body) {
                 if (response.statusCode == "200") {
                     var data = JSON.parse(body);
-                    console.log(data);
                     if (!issue){
-                        data = data[0];
-                        console.log(data);
+                        if (randflag) {
+                            data = data[Math.floor(Math.random() * data.length)];
+                        } else {
+                            data = data[0];
+                        }
                     }
                     if (data["pull_request"]["html_url"]){
                         console.log(data["pull_request"]["html_url"]);
