@@ -1,42 +1,55 @@
 {
     "repocount": {
-        "en": "{user} has {count} public repos."
+        "en": "{user} has {count} public repos.",
+        "cy": "Mae {count} archifdai cyhoeddus gan {user}."
     },
     "statusgood": {
-        "en": "\u000309Shit's fine"
+        "en": "\u000309Shit's fine",
+        "cy": "\u000309Cachu'n ddirwy"
     },
     "statusminor": {
-        "en": "\u000308Shit's touchy"
+        "en": "\u000308Shit's touchy",
+        "cy": "\u000308Cachu'n fregus"
     },
     "statusmajor": {
-        "en": "\u000304Shit's fucked:"
+        "en": "\u000304Shit's fucked:",
+        "cy": "\u000304Cachu wedi cyrraedd y ffan:"
     },
     "location": {
-        "en": "You can find that shit at:"
+        "en": "You can find that shit at:",
+        "cy": "Gallwch ddod o hyd y cachu yn:",
     },
     "forkedrepo": {
-        "en": "{name} is a forked {language} repo with {open_issues} unresolved issues [{forks}F {watchers}W]"
+        "en": "{name} is a forked {language} repo with {open_issues} unresolved issues [{forks}F {watchers}W]",
+        "cy": "{name} ydy archif {language} fforchog gyda {open_issues} materion heb eu datrys [{forks}F {watchers}W]"
     },
     "unforkedrepo": {
-        "en": "{name} is a {language} repo with {open_issues} unresolved issues [{forks}F {watchers}W]"
+        "en": "{name} is a {language} repo with {open_issues} unresolved issues [{forks}F {watchers}W]",
+        "cy": "{name} ydy archif {language} gyda {open_issues} materion heb eu datrys [{forks}F {watchers}W]"
     },
     "usernotfound": {
-        "en": "User not found."
+        "en": "User not found.",
+        "cy": "Defnyddiwr heb ei ganfod."
     },
     "issuenotfound": {
-        "en": "Unable to find that issue."
+        "en": "Unable to find that issue.",
+        "cy": "Wedi methu dod o hyd mater hwnnw"
     },
     "issue": {
-        "en": "Issue \u000308{number}\u0003: {title} [{state}{pull_request}\u000315; {comments} comments]{label}"
+        "en": "Issue \u000308{number}\u0003: {title} [{state}{pull_request}\u000315; {comments} comments]{label}",
+        "cy": "Mater \u000308{number}\u0003: {title} [{state}{pull_request}\u000315; {comments} sylwadau]{label}"
     },
     "commitcountboring": {
-        "en": "My code has been committed {count} times."
+        "en": "My code has been committed {count} times.",
+        "cy": "Mae fy cod wedi cael ei gyflawni ar {count} adegau."
     },
     "commitcountfun": {
-        "en": "My repository has the same number of commits as {fact} ({count})."
+        "en": "My repository has the same number of commits as {fact} ({count}).",
+        "cy": "Yr un nifer o ymrwymo fel {fact} gan fy archif ({count})."
     },
     "commitcountyear": {
-        "en": "My repository's commits number {count}, the year that {fact}."
+        "en": "My repository's commits number {count}, the year that {fact}.",
+        "cy": "Nifer o ymrwymo gan fy archif: {count}, y flwyddyn y {fact}."
     }
 }
 
