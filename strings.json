@@ -17,7 +17,7 @@
     },
     "location": {
         "en": "You can find that shit at:",
-        "cy": "Gallwch ddod o hyd y cachu yn:",
+        "cy": "Gallwch ddod o hyd y cachu yn:"
     },
     "forkedrepo": {
         "en": "{name} is a forked {language} repo with {open_issues} unresolved issues [{forks}F {watchers}W]",
