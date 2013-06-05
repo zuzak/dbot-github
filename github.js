@@ -9,7 +9,7 @@ var github = function(dbot) {
     this.api = {
         "githubStatus": function(callback){
             var reqUrl = "https://status.github.com/api/last-message.json";
-            request({"url": reqUrl, "headers": {"User-Agent": dbot.config.github.useragent}}, function(error, response, body) {
+            request({"url": reqUrl, "headers": {"User-Agent": this.config.useragent}}, function(error, response, body) {
                 callback(JSON.parse(body));
             });
         }
@@ -19,7 +19,7 @@ var github = function(dbot) {
     var commands = {
         '~repocount': function(event) {
             var reqUrl = "https://api.github.com/users/" + event.params[1] + "/repos";
-            request({"url": reqUrl, "headers": {"User-Agent": dbot.config.github.useragent}}, function(error, response, body) {
+            request({"url": reqUrl, "headers": {"User-Agent": this.config.useragent}}, function(error, response, body) {
                 if(response.statusCode == "200") {
                     var result = JSON.parse(body);
                     event.reply(dbot.t("repocount",{"user": event.params[1], "count": result.length}));
@@ -31,12 +31,12 @@ var github = function(dbot) {
         '~repo': function(event) {
             var repo = event.params[1];
             if (typeof repo == 'undefined') {
-                repo = dbot.config.github.defaultrepo;
+                repo = this.config.defaultrepo;
             }
 
             var reqUrl = "https://api.github.com/";
             reqUrl += "repos/" + repo;
-            request({"url": reqUrl, "headers": {"User-Agent": dbot.config.github.useragent}}, function(error, response, body) {
+            request({"url": reqUrl, "headers": {"User-Agent": this.config.useragent}}, function(error, response, body) {
 
                 var data = JSON.parse(body);
                 if (data["fork"]) {
@@ -59,7 +59,7 @@ var github = function(dbot) {
             }.bind(this));
         },
         '~milestone': function(event) {
-            var repo = dbot.config.github.defaultrepo; 
+            var repo = this.config.defaultrepo; 
             var name = event.params[1];
             if (event.params[2]){
                 repo = name;
@@ -68,7 +68,7 @@ var github = function(dbot) {
             var reqUrl = "https://api.github.com/repos/";
             reqUrl += repo + "/milestones";
 
-            request({"url": reqUrl, "headers":{"User-Agent": dbot.config.github.useragent}}, function(error, response, body) {
+            request({"url": reqUrl, "headers":{"User-Agent": this.config.useragent}}, function(error, response, body) {
                 var data = JSON.parse(body);
                 for (var section in data) {
                     var milestone = data[section];
@@ -100,13 +100,13 @@ var github = function(dbot) {
         '~repocount': function(event) {
         // TODO: add handling for non existent user
             var reqUrl = "https://api.github.com/users/" + event.params[1] + "/repos";
-            request({"url": reqUrl,"headers": { "User-Agent": dbot.config.github.useragent}}, function(error, response, body) {
+            request({"url": reqUrl,"headers": { "User-Agent": this.config.useragent}}, function(error, response, body) {
             var result = JSON.parse(body);
 			event.reply(event.params[1] + " has " + result.length + " public repositories.");
             });
         },
         '~grate': function(event) {
-            request.get({"url":"https://api.github.com/rate_limit", "headers":{"User-Agent": dbot.config.github.useragent}}, function(error, response, body) {
+            request.get({"url":"https://api.github.com/rate_limit", "headers":{"User-Agent": this.config.useragent}}, function(error, response, body) {
                 var data = JSON.parse(body);
                 if (data.message){
                     event.reply(data.message);
@@ -121,7 +121,7 @@ var github = function(dbot) {
                 repo = event.params[1];
                 issue = event.params[2];
             } else {
-                repo = dbot.config.github.defaultrepo;
+                repo = this.config.defaultrepo;
                 issue = event.params[1];
             }
 
@@ -134,8 +134,9 @@ var github = function(dbot) {
                 issue = "/" + issue; // got to be a better way
             }
             
-            var reqUrl = "https://api.github.com/repos/" + repo + "/issues" + issue + "?sort=" + dbot.config.github.sortorder;
-            request.get({"url": reqUrl, headers: { "User-Agent": dbot.config.github.useragent}}, function(error,response, body) {
+            var reqUrl = "https://api.github.com/repos/" + repo + "/issues" +
+                issue + "?sort=" + this.config.sortorder;
+            request.get({"url": reqUrl, headers: { "User-Agent": this.config.useragent}}, function(error,response, body) {
                 if (response.statusCode == "200") {
                     var data = JSON.parse(body);
                     if (!issue){
