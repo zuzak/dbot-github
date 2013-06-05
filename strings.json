@@ -62,7 +62,7 @@
     "commitcountyear": {
         "en": "My repository's commits number {count}, the year that {fact}.",
         "cy": "Nifer o ymrwymo gan fy archif: {count}, y flwyddyn y {fact}.",
-        "de": "Anzahl der Commits in meinem Repository {count}, des Jahres {fact}
+        "de": "Anzahl der Commits in meinem Repository {count}, des Jahres {fact}"
     }
 }
 
